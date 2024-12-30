@@ -1,54 +1,43 @@
-Description for the project:
-
-```markdown
 # Domain to IP Converter
 
-This Python script allows you to easily convert a domain name into its corresponding IP address. It utilizes the `socket` module to fetch the IP and provides a user-friendly interface with colorful text and an ASCII banner for a pleasant experience.
+This Python script allows you to convert a domain name into its corresponding IP address easily. The script leverages the `socket` module to retrieve the IP address of any given domain. With a simple user interface and colorful text, this tool provides a friendly experience for users.
 
 ## Features
-- Convert domain names (e.g., google.com) to IP addresses.
-- Colorful text output using the `termcolor` module.
-- ASCII art banner using the `pyfiglet` module.
+
+- Converts a domain name to an IP address.
 - Simple and easy-to-use interface.
+- Displays the result with color and ASCII art for a fun, engaging experience.
+- Written in Python 3.
 
 ## Requirements
-- Python 3
-- `termcolor` module
-- `pyfiglet` module
 
-## Installation
+- Python 3.x
+- `termcolor` library
+- `pyfiglet` library
 
-1. Clone or download the repository.
-2. Install the required dependencies by running:
+You can install the required libraries using the following command:
 
 ```bash
 pip install termcolor pyfiglet
 ```
 
-## Usage
+## How to Use
 
-To run the script, simply execute the following in your terminal:
-
-```bash
-python domain_to_ip_converter.py
-```
-
-You will be prompted to enter a domain name, and the script will output the corresponding IP address.
+1. Clone or download the script.
+2. Run the script in your terminal:
+   ```bash
+   python3 domain_to_ip_converter.py
+   ```
+3. Enter a domain name when prompted.
+4. The script will display the corresponding IP address of the entered domain.
 
 ## Example
 
 ```bash
 ..:: Please enter domain name: google.com
---> IP address of google.com is: 172.217.6.46
+--> IP address of google.com is: 142.250.185.78
 ```
 
 ## License
 
-This project is open-source and available under the MIT License.
-
-## Created By
-
-Sagar Biswas
-```
-
-Feel free to modify it as needed for your project!
+This project is licensed under the MIT License.
