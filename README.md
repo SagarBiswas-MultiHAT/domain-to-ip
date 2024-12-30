@@ -1,4 +1,4 @@
-Sure! Here’s a README.md file description for your project:
+Description for the project:
 
 ```markdown
 # Domain to IP Converter
