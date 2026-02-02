@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "domain-ip-converter"
+version = "0.1.0"
+description = "Resolve domains, URLs, and IPs to IPv4/IPv6 addresses."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Domain IP Converter Maintainers"}]
+keywords = ["dns", "ip", "resolver", "networking"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dns = ["dnspython>=2.4.2"]
+dev = [
+  "black>=24.1.0",
+  "flake8>=7.0.0",
+  "mypy>=1.8.0",
+  "pre-commit>=3.6.0",
+  "pytest>=7.4.0",
+  "pytest-cov>=4.1.0",
+  "pytest-mock>=3.12.0",
+]
+
+[project.scripts]
+ip-converter = "domain_ip_converter.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/example/domain-ip-converter"
+Issues = "https://github.com/example/domain-ip-converter/issues"
+
+[tool.setuptools]
+packages = ["domain_ip_converter"]
+
+[tool.black]
+line-length = 88
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [".venv", "build", "dist", ".git", "__pycache__"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+warn_unused_configs = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["dns", "dns.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "--cov=domain_ip_converter --cov-report=term-missing"
+pythonpath = ["."]

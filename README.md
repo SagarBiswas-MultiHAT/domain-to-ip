@@ -1,43 +1,86 @@
 # Domain to IP Converter
 
-This Python script allows you to convert a domain name into its corresponding IP address easily. The script leverages the `socket` module to retrieve the IP address of any given domain. With a simple user interface and colorful text, this tool provides a friendly experience for users.
+Resolve domains, URLs, and IP literals into IPv4/IPv6 addresses with a fast, library-safe API and a production-ready CLI.
 
-## Features
+## Overview
 
-- Converts a domain name to an IP address.
-- Simple and easy-to-use interface.
-- Displays the result with color and ASCII art for a fun, engaging experience.
-- Written in Python 3.
+- Accepts hostnames, IPv4, IPv6, IDNs (punycode), and http/https URLs.
+- Uses dnspython (A + AAAA) when available with real timeout support.
+- Falls back to `socket.getaddrinfo` when dnspython is unavailable.
+- Clean CLI with JSON output, concurrency, and quiet/no-color controls.
 
-## Requirements
+## Installation
 
-- Python 3.x
-- `termcolor` library
-- `pyfiglet` library
+Install from source:
 
-You can install the required libraries using the following command:
-
-```bash
-pip install termcolor pyfiglet
+```
+pip install .
 ```
 
-## How to Use
+Optional DNS dependency (recommended for timeouts):
 
-1. Clone or download the script.
-2. Run the script in your terminal:
-   ```bash
-   python3 domain_to_ip_converter.py
-   ```
-3. Enter a domain name when prompted.
-4. The script will display the corresponding IP address of the entered domain.
+```
+pip install .[dns]
+```
 
-## Example
+Development tooling:
 
-```bash
-..:: Please enter domain name: google.com
---> IP address of google.com is: 142.250.185.78
+```
+pip install .[dev]
+```
+
+## CLI Examples
+
+Resolve a domain:
+
+```
+ip-converter example.com
+```
+
+Resolve a URL and emit JSON:
+
+```
+ip-converter https://user:pass@example.com/path --json
+```
+
+Resolve many domains with concurrency and a custom timeout:
+
+```
+ip-converter example.com example.org --timeout 2.5 --concurrency 8
+```
+
+Read from a file:
+
+```
+ip-converter --file domains.txt
+```
+
+## Library Usage
+
+```python
+from domain_ip_converter import normalize_domain, resolve_host
+
+host = normalize_domain("https://пример.рф/path")
+result = resolve_host(host, timeout=2.0)
+print(result.ipv4, result.ipv6)
+```
+
+## Optional Dependencies
+
+- `dnspython` (extra: `dns`) enables reliable DNS timeouts and record querying.
+
+## Testing
+
+```
+pytest
+```
+
+Run with coverage:
+
+```
+pytest --cov=domain_ip_converter --cov-report=term-missing
 ```
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License. See LICENSE.
