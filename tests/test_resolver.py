@@ -106,7 +106,9 @@ def test_resolve_dnspython_noanswer(monkeypatch: pytest.MonkeyPatch) -> None:
     assert result.ipv6 == []
 
 
-def test_resolve_dnspython_nonameservers(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_resolve_dnspython_nonameservers(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setattr(resolver, "HAS_DNSPYTHON", True)
     monkeypatch.setattr(resolver, "dns_exception", _FakeDNS.exception)
     monkeypatch.setattr(resolver, "dns_resolver", _FakeDNS.resolver)
@@ -115,7 +117,9 @@ def test_resolve_dnspython_nonameservers(monkeypatch: pytest.MonkeyPatch) -> Non
         resolver.resolve_host("nonameservers.example", timeout=1.0)
 
 
-def test_resolve_dnspython_generic_error(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_resolve_dnspython_generic_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.setattr(resolver, "HAS_DNSPYTHON", True)
     monkeypatch.setattr(resolver, "dns_exception", _FakeDNS.exception)
     monkeypatch.setattr(resolver, "dns_resolver", _FakeDNS.resolver)

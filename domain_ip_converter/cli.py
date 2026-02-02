@@ -58,7 +58,9 @@ def _resolve_one(raw: str, timeout: float) -> Tuple[str, ResultItem]:
     return normalized, {"ipv4": result.ipv4, "ipv6": result.ipv6}
 
 
-def _resolve_many(domains: List[str], timeout: float, workers: int) -> ResultsMap:
+def _resolve_many(
+    domains: List[str], timeout: float, workers: int
+) -> ResultsMap:
     results: ResultsMap = {}
     if not domains:
         return results
@@ -96,10 +98,19 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Resolve domain names to IPv4 and IPv6 addresses",
     )
-    parser.add_argument("domains", nargs="*", help="Domains or URLs to resolve")
+    parser.add_argument(
+        "domains",
+        nargs="*",
+        help="Domains or URLs to resolve",
+    )
     parser.add_argument("-f", "--file", help="File containing domains")
     parser.add_argument("--json", action="store_true", help="JSON output")
-    parser.add_argument("-q", "--quiet", action="store_true", help="Suppress banner")
+    parser.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="Suppress banner",
+    )
     parser.add_argument(
         "--timeout", type=float, default=5.0, help="Timeout in seconds"
     )
@@ -146,7 +157,9 @@ def main(argv: Iterable[str] = sys.argv[1:]) -> int:
         print(_banner(args.no_color))
 
     results = _resolve_many(
-        raw_domains, timeout=args.timeout, workers=args.concurrency
+        raw_domains,
+        timeout=args.timeout,
+        workers=args.concurrency,
     )
 
     if args.json:

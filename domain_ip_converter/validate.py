@@ -71,7 +71,9 @@ def normalize_domain(raw: str) -> str:
             host.encode("idna").decode("ascii").lower()
         )
     except UnicodeError as exc:
-        raise InvalidInputError("Invalid internationalized domain name.") from exc
+        raise InvalidInputError(
+            "Invalid internationalized domain name."
+        ) from exc
 
     if len(ascii_host) > 253:
         raise InvalidInputError("Hostname exceeds 253 characters.")

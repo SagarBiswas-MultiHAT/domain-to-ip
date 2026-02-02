@@ -63,7 +63,10 @@ def test_cli_parser_no_inputs(
     assert "No domains or URLs provided" in err
 
 
-def test_cli_banner_when_tty(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_banner_when_tty(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     def fake_resolve(host: str, timeout: float = 5.0) -> ResolveResult:
         return ResolveResult(ipv4=["203.0.113.10"], ipv6=[])
 
@@ -76,7 +79,10 @@ def test_cli_banner_when_tty(monkeypatch: pytest.MonkeyPatch, capsys: pytest.Cap
     assert "Domain to IP Converter" in output
 
 
-def test_cli_no_color_suppresses_banner(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_no_color_suppresses_banner(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     def fake_resolve(host: str, timeout: float = 5.0) -> ResolveResult:
         return ResolveResult(ipv4=["203.0.113.11"], ipv6=[])
 
@@ -89,7 +95,10 @@ def test_cli_no_color_suppresses_banner(monkeypatch: pytest.MonkeyPatch, capsys:
     assert "Domain to IP Converter" not in output
 
 
-def test_cli_invalid_timeout(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_invalid_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     monkeypatch.setattr(sys.stdout, "isatty", lambda: False)
     code = cli.main(["example.com", "--timeout", "0"])
     assert code == 2
@@ -97,7 +106,10 @@ def test_cli_invalid_timeout(monkeypatch: pytest.MonkeyPatch, capsys: pytest.Cap
     assert "--timeout must be greater than 0" in err
 
 
-def test_cli_invalid_concurrency(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_invalid_concurrency(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     monkeypatch.setattr(sys.stdout, "isatty", lambda: False)
     code = cli.main(["example.com", "--concurrency", "0"])
     assert code == 2
@@ -110,7 +122,10 @@ def test_cli_file_input(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
         return ResolveResult(ipv4=["203.0.113.12"], ipv6=[])
 
     file_path = tmp_path / "domains.txt"
-    file_path.write_text("example.com\n# comment\nexample.org\n", encoding="utf-8")
+    file_path.write_text(
+        "example.com\n# comment\nexample.org\n",
+        encoding="utf-8",
+    )
 
     monkeypatch.setattr(cli, "resolve_host", fake_resolve)
     monkeypatch.setattr(sys.stdout, "isatty", lambda: False)
