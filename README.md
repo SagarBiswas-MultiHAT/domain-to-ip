@@ -1,5 +1,15 @@
 # Domain to IP Converter
 
+<div align="right">
+
+[![CI](https://github.com/SagarBiswas-MultiHAT/domain2ip/actions/workflows/ci.yml/badge.svg)](https://github.com/SagarBiswas-MultiHAT/domain2ip/actions)
+&nbsp;
+[![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://www.python.org/)
+&nbsp; 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+</div>
+
 Resolve domains, URLs, and IP literals into IPv4/IPv6 addresses with a fast, library-safe API and a production-ready CLI.
 
 ## Overview
